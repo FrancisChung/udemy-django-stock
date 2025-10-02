@@ -19,6 +19,11 @@ The course contains 39 videos – and is just over 2 hours long. Watch the video
 6. django-admin.py startproject stocks
 7. python manage.py runserver
    
-#### Migrations
+### Migrations
 1. python manage.py migrate
+
+### Admin
+
+1. python manage.py createsuperuser
+2. python manage.py changepassword <user>
 
