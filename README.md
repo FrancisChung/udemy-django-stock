@@ -32,3 +32,10 @@ The course contains 39 videos – and is just over 2 hours long. Watch the video
 ### API Provider
 iexcloud.io went bust. Using https://www.alphavantage.co/documentation/
 
+## Gotchas
+
+1. Alphavantage's return json has field names with spaces in it. It's best to preprocess those and passing it to the html as separate fields.
+e.g 'symbol':result["Meta Data"]["2. Symbol"]
+
+
+
