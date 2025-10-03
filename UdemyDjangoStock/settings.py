@@ -22,6 +22,32 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-w7%(u@z!!$#4m4_iuk6*29$=tv746f*7l)!aplgmq8xi22kx(m'
 
+
+
+
+def read_api_key(filepath="apikey.txt"):
+    """
+    Reads the API key from a text file.
+
+    Args:
+        filepath (str): Path to the file containing the API key.
+                        Defaults to 'apikey.txt'.
+
+    Returns:
+        str: The API key as a string, or None if the file is missing/empty.
+    """
+    try:
+        with open(filepath, "r") as f:
+            api_key = f.read().strip()
+            return api_key if api_key else None
+    except FileNotFoundError:
+        print(f"Error: '{filepath}' not found.")
+        return None
+
+
+
+API_KEY = read_api_key()
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
