@@ -12,8 +12,10 @@ The course contains 39 videos – and is just over 2 hours long. Watch the video
 
 1. pip freeze
 2. pip install virtualenv
-3. python -m venv venv
-4. source venv/scripts/activate
+~~3. python -m venv venv~~
+~~4. source venv/scripts/activate~~
+3. pyenv virtualenv venv
+4. pyenv activate venv
 
 5. pip install django (or pip install django==x.y.z)
 6. django-admin.py startproject stocks
