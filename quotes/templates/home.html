@@ -12,7 +12,10 @@
             {{ symbol }}
             <br />
             <br />
-            {{ api }}
+            {% for price in prices %}
+                Date: {{price.date}}    Price: {{ price.price }}
+                <br />
+            {%  endfor %}
         {% endif %}
     {% endif %}
     <br />
