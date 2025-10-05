@@ -18,7 +18,8 @@ def home(request):
     daily_prices = [
         {
             'date': date,
-            'price': data['4. close']
+            'opening_price': data['1. open'],
+            'closing_price': data['4. close']
         }
         for date, data in result['Time Series (Daily)'].items()
     ]
