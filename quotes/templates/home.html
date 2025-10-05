@@ -13,7 +13,9 @@
             <br />
             <br />
             {% for price in prices %}
-                Date: {{price.date}}    Price: {{ price.price }}
+                Date: {{price.date}}<br />
+                Opening Price: {{ price.opening_price }}<br />
+                Closing Price: {{ price.closing_price }}<br />
                 <br />
             {%  endfor %}
         {% endif %}
