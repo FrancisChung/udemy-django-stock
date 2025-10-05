@@ -20,7 +20,7 @@
               <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
+          <form action="{% url 'home' %}" class="d-flex" role="search" method="POST">
               {% csrf_token  %}
               <input class="form-control me-2" type="search" placeholder="Get Stock Quote" aria-label="Search">
               <button class="btn btn-outline-secondary" type="submit">Search</button>
