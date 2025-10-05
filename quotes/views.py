@@ -15,8 +15,17 @@ def home(request):
         print("API request failed", e)
         result = f"API request failed - {e}"
 
+    daily_prices = [
+        {
+            'date': date,
+            'price': data['4. close']
+        }
+        for date, data in result['Time Series (Daily)'].items()
+    ]
+
     return render(request, 'home.html', {'api': result,
-                                         'symbol':result["Meta Data"]["2. Symbol"]
+                                         'symbol': result["Meta Data"]["2. Symbol"],
+                                         'prices': daily_prices
                                          })
 
 def about(request):
