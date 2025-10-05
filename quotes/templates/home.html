@@ -9,7 +9,7 @@
         {%  if "Error" in api %}
             There was a problem with the ticker symbol
         {%  else %}
-            {{ symbol }}
+            <h4>{{ symbol }}</h4>
             <br />
             <br />
             {% for price in prices %}
