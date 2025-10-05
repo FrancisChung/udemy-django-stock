@@ -11,16 +11,11 @@ def home(request):
 
     if request.method == "POST":
         ticker = request.POST['ticker']
-        "do something"
+        result = search_ticker(ticker)
     else:
-        "do something else"
+        result = search_ticker("IBM")
 
-    api_request = search_ticker(api_key)
-    try:
-        result = json.loads(api_request.content)
-    except Exception as e:
-        print("API request failed", e)
-        result = f"API request failed - {e}"
+
 
     daily_prices = [
         {
@@ -37,13 +32,19 @@ def home(request):
                                          })
 
 
-def search_ticker(ticker: str = "IBM") -> Response:
+def search_ticker(ticker: str = "IBM"):
     api_key = settings.API_KEY
     print("API_KEY", api_key)
 
     api_request = requests.get(
         f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey={api_key}')
-    return api_request
+    try:
+        result = json.loads(api_request.content)
+    except Exception as e:
+        print("API request failed", e)
+        result = f"Error - API request failed - {e}"
+
+    return result
 
 
 def about(request):
