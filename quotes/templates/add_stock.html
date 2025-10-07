@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>Add Stock</h2>
-    <p></p>
-{% endblock %}
+
+    <br/>
+    <br/>
+
+    {% if api %}
+        {%  if "Error" in api %}
+            There was a problem with the ticker symbol
+        {%  else %}
+            <br />
+            <br />
+            {% for stock in ticker %}
+                Date: {{stock.date}}<br />
+                Opening Price: {{ stock.opening_price }}<br />
+                Closing Price: {{ stock.closing_price }}<br />
+                <br />
+            {%  endfor %}
+        {% endif %}
+    {% endif %}
+    <br />
+{% endblock %}.
