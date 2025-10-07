@@ -6,6 +6,8 @@ from requests import Response
 
 from UdemyDjangoStock import settings
 
+none_ticker_error = f"Error - API request failed - None passed as Ticker"
+
 def home(request):
     if request.method == "POST":
         ticker = request.POST.get("ticker");
@@ -23,6 +25,12 @@ def home(request):
 
 
 def extract_prices(result: str | Any) -> list[dict[str, Any]]:
+    if result == none_ticker_error:
+        return [{
+            'date': 'None',
+            'opening_price': 'None',
+            'closing_price': 'None'
+        }]
     daily_prices = [
         {
             'date': date,
@@ -36,7 +44,7 @@ def extract_prices(result: str | Any) -> list[dict[str, Any]]:
 
 def search_ticker(ticker: str = "IBM"):
     if ticker == "None":
-        result = f"Error - API request failed - None passed as Ticker"
+        result = none_ticker_error
         return result
 
     api_key = settings.API_KEY
