@@ -5,6 +5,7 @@ import json
 from requests import Response
 
 from UdemyDjangoStock import settings
+from quotes.models import Stock
 
 none_ticker_error = f"Error - API request failed - None passed as Ticker"
 
@@ -61,6 +62,8 @@ def search_ticker(ticker: str = "IBM"):
     return result
 
 def add_stock(request):
-    return render(request, 'add_stock.html', {})
+
+    ticker = Stock.objects.all()
+    return render(request, 'add_stock.html', {'ticker': ticker})
 def about(request):
     return render(request, 'about.html', {})
