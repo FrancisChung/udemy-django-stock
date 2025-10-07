@@ -3,6 +3,13 @@
     <h2>Add Stock</h2>
 
     <br/>
+
+    <form action="{% url 'home' %}" class="d-flex" role="search" method="POST">
+      {% csrf_token  %}
+      <input class="form-control me-2" type="search" placeholder="Get Stock Quote" aria-label="Search" name="ticker">
+      <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </form>
+
     <br/>
 
     {% if api %}
@@ -12,9 +19,8 @@
             <br />
             <br />
             {% for stock in ticker %}
-                Date: {{stock.date}}<br />
-                Opening Price: {{ stock.opening_price }}<br />
-                Closing Price: {{ stock.closing_price }}<br />
+                {{  stock }}
+                <br />
                 <br />
             {%  endfor %}
         {% endif %}
