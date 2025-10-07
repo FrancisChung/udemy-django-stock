@@ -1,3 +1,6 @@
+from typing import Any
+
+from django.core.handlers.wsgi import WSGIRequest
 from django.shortcuts import render
 import requests
 import json
@@ -10,12 +13,7 @@ from quotes.models import Stock
 none_ticker_error = f"Error - API request failed - None passed as Ticker"
 
 def home(request):
-    if request.method == "POST":
-        ticker = request.POST.get("ticker")
-        print("ticker:", ticker)
-        result = search_ticker(ticker)
-    else:
-        result = search_ticker("IBM")
+    result = extract_ticker(request)
 
     daily_prices = extract_prices(result)
 
@@ -23,6 +21,16 @@ def home(request):
                                          'symbol': result["Meta Data"]["2. Symbol"],
                                          'prices': daily_prices
                                          })
+
+
+def extract_ticker(request: WSGIRequest | Any) -> str | Any:
+    if request.method == "POST":
+        ticker = request.POST.get("ticker")
+        print("ticker:", ticker)
+        result = search_ticker(ticker)
+    else:
+        result = search_ticker("IBM")
+    return result
 
 
 def extract_prices(result: str) -> list[dict[str, str]]:
