@@ -24,7 +24,7 @@ def home(request):
                                          })
 
 
-def extract_prices(result: str | Any) -> list[dict[str, Any]]:
+def extract_prices(result: str) -> list[dict[str, str]]:
     if result == none_ticker_error:
         return [{
             'date': 'None',
@@ -44,9 +44,9 @@ def extract_prices(result: str | Any) -> list[dict[str, Any]]:
 
 def search_ticker(ticker: str = "IBM"):
     if ticker == "None":
-        result = none_ticker_error
-        return result
+        ticker = "IBM"
 
+    print("ticker:", ticker)
     api_key = settings.API_KEY
     print("API_KEY", api_key)
 
