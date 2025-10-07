@@ -7,10 +7,9 @@ from requests import Response
 from UdemyDjangoStock import settings
 
 def home(request):
-
-
     if request.method == "POST":
-        ticker = request.POST['ticker']
+        ticker = request.POST.get("ticker");
+        print("ticker:", ticker)
         result = search_ticker(ticker)
     else:
         result = search_ticker("IBM")
@@ -32,7 +31,12 @@ def home(request):
                                          })
 
 
+
 def search_ticker(ticker: str = "IBM"):
+    if ticker == "None":
+        result = f"Error - API request failed - None passed as Ticker"
+        return result
+
     api_key = settings.API_KEY
     print("API_KEY", api_key)
 
