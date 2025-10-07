@@ -14,8 +14,15 @@ def home(request):
     else:
         result = search_ticker("IBM")
 
+    daily_prices = extract_prices(result)
+
+    return render(request, 'home.html', {'api': result,
+                                         'symbol': result["Meta Data"]["2. Symbol"],
+                                         'prices': daily_prices
+                                         })
 
 
+def extract_prices(result: str | Any) -> list[dict[str, Any]]:
     daily_prices = [
         {
             'date': date,
@@ -24,12 +31,7 @@ def home(request):
         }
         for date, data in result['Time Series (Daily)'].items()
     ]
-
-    return render(request, 'home.html', {'api': result,
-                                         'symbol': result["Meta Data"]["2. Symbol"],
-                                         'prices': daily_prices
-                                         })
-
+    return daily_prices
 
 
 def search_ticker(ticker: str = "IBM"):
