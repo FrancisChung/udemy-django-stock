@@ -10,7 +10,7 @@ none_ticker_error = f"Error - API request failed - None passed as Ticker"
 
 def home(request):
     if request.method == "POST":
-        ticker = request.POST.get("ticker");
+        ticker = request.POST.get("ticker")
         print("ticker:", ticker)
         result = search_ticker(ticker)
     else:
