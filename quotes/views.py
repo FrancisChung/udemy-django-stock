@@ -30,6 +30,9 @@ def extract_prices(result: str) -> list[dict[str, str]]:
             'opening_price': 'None',
             'closing_price': 'None'
         }]
+
+    print("result", result)
+
     daily_prices = [
         {
             'ticker': result['Meta Data']['2. Symbol'],
@@ -51,7 +54,7 @@ def search_ticker(ticker: str = "IBM"):
     print("API_KEY", api_key)
 
     api_request = requests.get(
-        f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey={api_key}')
+        f'https://api.twelvedata.com/time_series?symbol={ticker}&interval=1day&apikey={api_key}')
     try:
         result = json.loads(api_request.content)
     except Exception as e:
@@ -62,16 +65,11 @@ def search_ticker(ticker: str = "IBM"):
 
 def home(request):
     result = extract_ticker(request)
+    return render(request, 'home.html', {'data': result })
 
-    daily_prices = extract_prices(result)
-
-    return render(request, 'home.html', {'api': result,
-                                         'symbol': result["Meta Data"]["2. Symbol"],
-                                         'prices': daily_prices
-                                         })
-
-def add_stock(requRefest):
+def add_stock(request):
     if request.method == 'POST':
+        home(request)
         form = StockForm(request.POST or None)
         messages.success(request, 'Finding Stock and Saving')
         if form.is_valid():
@@ -82,6 +80,7 @@ def add_stock(requRefest):
         else:
             messages.success(request, 'Errors in form')
     else:
+        print('request method', request.method)
         messages.success(request, 'Retrieving all the stocks in DB')
         ticker = Stock.objects.all()
         return render(request, 'add_stock.html', {'ticker': ticker})
