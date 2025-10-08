@@ -74,14 +74,16 @@ def search_ticker(ticker: str = "IBM"):
 def add_stock(request):
     if request.method == 'POST':
         form = StockForm(request.POST or None)
-
+        messages.success(request, 'Finding Stock and Saving')
         if form.is_valid():
+            messages.success(request, 'Saving Stock')
             form.save()
             messages.success(request, 'Stock has been added')
             return redirect('add_stock')
         else:
             messages.success(request, 'Errors in form')
     else:
+        messages.success(request, 'Retrieving all the stocks in DB')
         ticker = Stock.objects.all()
         return render(request, 'add_stock.html', {'ticker': ticker})
 
