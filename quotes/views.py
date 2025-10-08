@@ -43,6 +43,7 @@ def extract_prices(result: str) -> list[dict[str, str]]:
         }]
     daily_prices = [
         {
+            'ticker': result['Meta Data']['2. Symbol'],
             'date': date,
             'opening_price': data['1. open'],
             'closing_price': data['4. close']
@@ -78,6 +79,22 @@ def add_stock(request):
             form.save()
             messages.success(request, 'Stock has been added')
             return redirect('add_stock')
+        else:
+            messages.success(request, 'Errors in form')
+    else:
+        ticker = Stock.objects.all()
+        return render(request, 'add_stock.html', {'ticker': ticker})
+
+def add_stock_2(request):
+    if request.method == 'POST':
+        form = StockForm(request.POST or None)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Stock has been added')
+            return redirect('add_stock')
+        else:
+            messages.success(request, 'Errors in form')
     else:
         ticker = Stock.objects.all()
         return render(request, 'add_stock.html', {'ticker': ticker})
