@@ -6,8 +6,8 @@
 
     <form action="{% url 'home' %}" class="d-flex" role="search" method="POST">
       {% csrf_token  %}
-      <input class="form-control me-2" type="search" placeholder="Get Stock Quote" aria-label="Search" name="ticker">
-      <button class="btn btn-outline-secondary" type="submit">Search</button>
+      <input class="form-control me-2" type="search" placeholder="Add to Portfolio" aria-label="Search" name="ticker">
+      <button class="btn btn-outline-secondary" type="submit">Add Stock</button>
     </form>
 
     <br/>
