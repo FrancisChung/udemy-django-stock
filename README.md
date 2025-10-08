@@ -30,12 +30,14 @@ The course contains 39 videos – and is just over 2 hours long. Watch the video
 2. python manage.py changepassword <user>
 
 ### API Provider
-iexcloud.io went bust. Using https://www.alphavantage.co/documentation/
+iexcloud.io went bust. 
+~~Using https://www.alphavantage.co/documentation/~~ (Only 25 API calls per day)
+Using twelvedata.com (Up to 800 calls per day, assuming api call costs 1 credit per call)
 
 ## Gotchas
 
-1. Alphavantage's return json has field names with spaces in it. It's best to preprocess those and passing it to the html as separate fields.
-e.g 'symbol':result["Meta Data"]["2. Symbol"]
+~~1. Alphavantage's return json has field names with spaces in it. It's best to preprocess those and passing it to the html as separate fields.
+e.g 'symbol':result["Meta Data"]["2. Symbol"]~~
 
 
 
