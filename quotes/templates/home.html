@@ -13,6 +13,7 @@
             <br />
             <br />
             {% for price in prices %}
+                Ticker: {{ price.ticker }}<br/>
                 Date: {{price.date}}<br />
                 Opening Price: {{ price.opening_price }}<br />
                 Closing Price: {{ price.closing_price }}<br />
