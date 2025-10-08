@@ -13,17 +13,6 @@ from quotes.models import Stock
 
 none_ticker_error = f"Error - API request failed - None passed as Ticker"
 
-def home(request):
-    result = extract_ticker(request)
-
-    daily_prices = extract_prices(result)
-
-    return render(request, 'home.html', {'api': result,
-                                         'symbol': result["Meta Data"]["2. Symbol"],
-                                         'prices': daily_prices
-                                         })
-
-
 def extract_ticker(request: WSGIRequest | Any) -> str | Any:
     if request.method == "POST":
         ticker = request.POST.get("ticker")
@@ -71,7 +60,17 @@ def search_ticker(ticker: str = "IBM"):
 
     return result
 
-def add_stock(request):
+def home(request):
+    result = extract_ticker(request)
+
+    daily_prices = extract_prices(result)
+
+    return render(request, 'home.html', {'api': result,
+                                         'symbol': result["Meta Data"]["2. Symbol"],
+                                         'prices': daily_prices
+                                         })
+
+def add_stock(requRefest):
     if request.method == 'POST':
         form = StockForm(request.POST or None)
         messages.success(request, 'Finding Stock and Saving')
@@ -87,18 +86,5 @@ def add_stock(request):
         ticker = Stock.objects.all()
         return render(request, 'add_stock.html', {'ticker': ticker})
 
-def add_stock_2(request):
-    if request.method == 'POST':
-        form = StockForm(request.POST or None)
-
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Stock has been added')
-            return redirect('add_stock')
-        else:
-            messages.success(request, 'Errors in form')
-    else:
-        ticker = Stock.objects.all()
-        return render(request, 'add_stock.html', {'ticker': ticker})
 def about(request):
     return render(request, 'about.html', {})
