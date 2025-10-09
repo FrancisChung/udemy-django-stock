@@ -82,8 +82,9 @@ def add_stock(request):
     else:
         print('request method', request.method)
         messages.success(request, 'Retrieving all the stocks in DB')
-        ticker = Stock.objects.all()
-        return render(request, 'add_stock.html', {'ticker': ticker})
+        ticker = Stock.objects.values()
+        print("ticker from db", ticker)
+        return render(request, 'add_stock.html', {'db': ticker})
 
 
 def dto_to_db(input) -> Any:
