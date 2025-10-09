@@ -99,9 +99,15 @@ def dto_to_db(input) -> Any:
             "opening_price": v.get("open", 0),
             "closing_price": v.get("close", 0)
         })
-
     return dto_list
 
+
+def delete_stock(request, stock_id):
+    item = Stock.objects.get(id=stock_id)
+    item.delete()
+
+    messages.success(request, 'Stock has been deleted')
+    return redirect(add_stock)
 
 def about(request):
     return render(request, 'about.html', {})
