@@ -69,21 +69,38 @@ def home(request):
 
 def add_stock(request):
     if request.method == 'POST':
-        home(request)
-        form = StockForm(request.POST or None)
-        messages.success(request, 'Finding Stock and Saving')
-        if form.is_valid():
-            messages.success(request, 'Saving Stock')
-            form.save()
-            messages.success(request, 'Stock has been added')
-            return redirect('add_stock')
-        else:
-            messages.success(request, 'Errors in form')
+        results = extract_ticker(request)
+        transformed = dto_to_db(results)
+        for item in transformed:
+            form = StockForm(item)
+            messages.success(request, 'Finding Stock and Saving')
+            if form.is_valid():
+                messages.success(request, 'Saving Stock')
+                form.save()
+                messages.success(request, 'Stock has been added')
+        return redirect('add_stock')
     else:
         print('request method', request.method)
         messages.success(request, 'Retrieving all the stocks in DB')
         ticker = Stock.objects.all()
         return render(request, 'add_stock.html', {'ticker': ticker})
+
+
+def dto_to_db(input) -> Any:
+    ticker = input.get("meta", {}).get("symbol", "N/A")
+    values = input.get("values", [])
+
+    dto_list = []
+    for v in values:
+        dto_list.append({
+            "ticker": ticker,
+            "date": v.get("datetime"),
+            "opening_price": v.get("open", 0),
+            "closing_price": v.get("close", 0)
+        })
+
+    return dto_list
+
 
 def about(request):
     return render(request, 'about.html', {})
