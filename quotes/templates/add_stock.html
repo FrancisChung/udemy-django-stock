@@ -33,7 +33,7 @@
             <br />
             <br />
             {% for item in db %}
-                Id : {{ item.id }} <br />
+                Id : <a href="{% url 'delete' item.id %}">Delete Stock {{ item.id }}</a><br />
                 Ticker: {{ item.ticker }}<br/>
                 Date: {{item.date}}<br />
                 Opening Price: {{ item.opem }}<br />
