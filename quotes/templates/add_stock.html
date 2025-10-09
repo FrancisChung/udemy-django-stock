@@ -19,7 +19,24 @@
             <br />
             <br />
             {% for stock in ticker %}
-                {{  stock }}
+                {{ stock }}
+                <br />
+                <br />
+            {%  endfor %}
+        {% endif %}
+    {% endif %}
+
+    {% if db %}
+        {%  if "Error" in ticker %}
+            There was a problem with the ticker symbol
+        {%  else %}
+            <br />
+            <br />
+            {% for item in db %}
+                Ticker: {{ item.ticker }}<br/>
+                Date: {{item.date}}<br />
+                Opening Price: {{ item.opem }}<br />
+                Closing Price: {{ item.close }}<br />
                 <br />
                 <br />
             {%  endfor %}
