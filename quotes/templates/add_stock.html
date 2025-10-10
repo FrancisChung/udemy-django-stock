@@ -12,20 +12,6 @@
 
     <br/>
 
-    {% if ticker %}
-        {%  if "Error" in ticker %}
-            There was a problem with the ticker symbol
-        {%  else %}
-            <br />
-            <br />
-            {% for stock in ticker %}
-                {{ stock }}
-                <br />
-                <br />
-            {%  endfor %}
-        {% endif %}
-    {% endif %}
-
     {% if db %}
         {%  if "Error" in ticker %}
             There was a problem with the ticker symbol
