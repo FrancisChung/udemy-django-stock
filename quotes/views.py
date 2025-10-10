@@ -73,11 +73,9 @@ def add_stock(request):
         transformed = dto_to_db(results)
         for item in transformed:
             form = StockForm(item)
-            messages.success(request, 'Finding Stock and Saving')
             if form.is_valid():
-                messages.success(request, 'Saving Stock')
                 form.save()
-                messages.success(request, 'Stock has been added')
+        messages.success(request, 'Stock has been added')
         return redirect('add_stock')
     else:
         print('request method', request.method)
