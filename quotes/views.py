@@ -64,8 +64,9 @@ def search_ticker(ticker: str = "IBM"):
     return result
 
 def home(request):
-    result = extract_ticker(request)
-    return render(request, 'home.html', {'data': result })
+    return redirect(add_stock)
+    # result = extract_ticker(request)
+    # return render(request, 'home.html', {'data': result })
 
 def add_stock(request):
     if request.method == 'POST':
