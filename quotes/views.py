@@ -101,12 +101,16 @@ def dto_to_db(input) -> Any:
     return dto_list
 
 
-def delete_stock(request, stock_id):
+def delete(request, stock_id):
     item = Stock.objects.get(id=stock_id)
     item.delete()
 
     messages.success(request, 'Stock has been deleted')
     return redirect(add_stock)
+
+def delete_stock(request):
+    messages.success(request, 'Stock has been deleted')
+    return redirect(request, "delete_stock.html", {})
 
 def about(request):
     return render(request, 'about.html', {})
