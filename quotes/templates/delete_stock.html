@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>Delete Stock</h2>
-
+    {{  db }}
     {% if db %}
         {%  if "Error" in ticker %}
             There was a problem with the ticker symbol
@@ -9,21 +9,14 @@
             <table class="table table-striped table-hover table-bordered">
               <thead>
                 <tr>
-                  <th scope="col">Id</th>
                   <th scope="col">Ticker</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">Opening Price</th>
-                  <th scope="col">Closing Price</th>
+
                 </tr>
               </thead>
               <tbody>
                 {% for item in db %}
                     <tr>
-                        <th scope="row"><a href="{% url 'delete' item.id %}">Delete Stock {{ item.id }}</a></th>
-                        <td>{{item.ticker }}</td>
-                        <td>{{item.date}}</td>
-                        <td>{{item.opening_price }}</td>
-                        <td>{{item.closing_price }}</td>
+                        <th scope="row"><a href="{% url 'delete_ticker' item.ticker %}">Delete Stock {{ item.ticker }}</a></th>
                     </tr>
                 {%  endfor %}
               </tbody>
