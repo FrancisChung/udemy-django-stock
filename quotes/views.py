@@ -87,7 +87,8 @@ def add_stock(request):
 
 
 def delete_stock(request):
-    return render(request, "delete_stock.html", {})
+    ticker = Stock.objects.values()
+    return render(request, "delete_stock.html", {'db': ticker})
 
 
 def dto_to_db(input) -> Any:
