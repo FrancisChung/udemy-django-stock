@@ -120,11 +120,11 @@ def delete(request, stock_id):
     return redirect(add_stock)
 
 def delete_ticker(request, ticker):
-    items = Stock.objects.get(ticker=ticker)
+    items = Stock.objects.filter(ticker=ticker)
     items.delete()
 
-    messages.success(request, 'Ticker  has been deleted')
-    return redirect(add_stock)
+    messages.success(request, f'Ticker {ticker} has been deleted')
+    return redirect(delete_stock)
 
 
 def about(request):
