@@ -86,6 +86,10 @@ def add_stock(request):
         return render(request, 'add_stock.html', {'db': ticker})
 
 
+def delete_stock(request):
+    return render(request, "delete_stock.html", {})
+
+
 def dto_to_db(input) -> Any:
     ticker = input.get("meta", {}).get("symbol", "N/A")
     values = input.get("values", [])
@@ -108,9 +112,6 @@ def delete(request, stock_id):
     messages.success(request, 'Stock has been deleted')
     return redirect(add_stock)
 
-def delete_stock(request):
-    messages.success(request, 'Stock has been deleted')
-    return redirect(request, "delete_stock.html", {})
 
 def about(request):
     return render(request, 'about.html', {})
