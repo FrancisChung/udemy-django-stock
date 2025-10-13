@@ -7,7 +7,7 @@ urlpatterns = [
     path('home.html', views.home, name="home"),
     path('add_stock.html', views.add_stock, name="add_stock"),
     path('delete_stock.html', views.delete_stock, name="delete_stock"),
-
     path('delete/<int:stock_id>', views.delete, name="delete"),
+    path('delete_ticker/<str:ticker>', views.delete_ticker, name="delete_ticker"),
 
 ]
