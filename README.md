@@ -30,8 +30,8 @@ The course contains 39 videos – and is just over 2 hours long. Watch the video
 2. python manage.py changepassword <user>
 
 ### API Provider
-iexcloud.io went bust. 
-~~Using https://www.alphavantage.co/documentation/~~ (Only 25 API calls per day)
+iexcloud.io went bust. <br>
+~~Using https://www.alphavantage.co/documentation/~~ ~~(Only 25 API calls per day)~~ <br>
 Using twelvedata.com (Up to 800 calls per day, assuming api call costs 1 credit per call)
 
 ## Gotchas
