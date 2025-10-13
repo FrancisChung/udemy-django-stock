@@ -22,6 +22,11 @@ def extract_ticker(request: WSGIRequest | Any) -> str | Any:
         result = search_ticker("IBM")
     return result
 
+def extract_unique_tickers(stock_data):
+    unique_tickers = [{'ticker': ticker} for ticker in set(item['ticker'] for item in stock_data)]
+    print("unique_tickers:", unique_tickers)
+    return unique_tickers
+
 
 def extract_prices(result: str) -> list[dict[str, str]]:
     if result == none_ticker_error:
@@ -88,7 +93,8 @@ def add_stock(request):
 
 def delete_stock(request):
     ticker = Stock.objects.values()
-    return render(request, "delete_stock.html", {'db': ticker})
+    unique_tickers = extract_unique_tickers(ticker)
+    return render(request, "delete_stock.html", {'db': unique_tickers})
 
 
 def dto_to_db(input) -> Any:
@@ -111,6 +117,13 @@ def delete(request, stock_id):
     item.delete()
 
     messages.success(request, 'Stock has been deleted')
+    return redirect(add_stock)
+
+def delete_ticker(request, ticker):
+    items = Stock.objects.get(ticker=ticker)
+    items.delete()
+
+    messages.success(request, 'Ticker  has been deleted')
     return redirect(add_stock)
 
 
