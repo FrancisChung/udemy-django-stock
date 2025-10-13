@@ -34,12 +34,12 @@ iexcloud.io went bust. <br>
 ~~Using https://www.alphavantage.co/documentation/~~ ~~(Only 25 API calls per day)~~ <br>
 Using twelvedata.com (Up to 800 calls per day, assuming api call costs 1 credit per call)
 
-## Gotchas
+### Gotchas
 
 ~~1. Alphavantage's return json has field names with spaces in it. It's best to preprocess those and passing it to the html as separate fields.
 e.g 'symbol':result["Meta Data"]["2. Symbol"]~~
 
-## Certificate
+### Certificate
 https://www.udemy.com/certificate/UC-94560d42-8593-430c-9295-025251f7f175/
 
 
